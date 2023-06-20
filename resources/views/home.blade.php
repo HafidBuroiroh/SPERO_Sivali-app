@@ -94,7 +94,7 @@
                             @foreach ($Banner as $key => $item)
                             <a href="{{ route('detail_barang', $item->id_barang)}}" target="_blank">
                                 <div class="carousel-item {{ $key == 0 ? 'active' : ''}}" id="carousel_img">
-                                    <img class="img-fluid" src="{{asset('../storage/image/'.'/'.$item->gambar_banner)}}"
+                                    <img class="img-fluid" src="{{asset('img/'.$item->gambar_banner)}}"
                                         alt="">
                                 </div>
                             </a>
@@ -139,7 +139,7 @@
         <a class="text-black" href="{{ route('katalogFilter', $item->id)}}" style="text-decoration: none;">
             <div class="logo">
                 <div class="logo__img">
-                    <img class="img-fluid" src="{{asset('../storage/image/'.'/'.$item->gambar_kategori)}}" alt=""
+                    <img class="img-fluid" src="{{asset('img/'.$item->gambar_kategori)}}" alt=""
                         width="50">
                 </div>
                 <div class="desc_logo_img">
@@ -191,86 +191,86 @@
     <div class="col-md-12">
         <div class="row lbblbb mt-5" id="lbblbb">
             @foreach ($barang as $item)
-            {{-- <div class="col-md-4 col-lg-3 col-12 col-sm-6 mt-4 list-barang-barang" id="home_list_barang" --}}
+            {{-- <div class="col-md-4 col-lg-3 col-12 col-sm-6 mt-4 list-barang-barang" id="home_list_barang"> --}}
             <div class="list-barang-barang" id="home_list_barang"
-            terjual_count="{{$item->terjual}}"
-            terbaru_count="{{$item->created_at}}"
-            harga_count="
-            @if ($item->harga_diskon==null)
-                {{$item->harga_asli}}
-            @else
-                {{$item->harga_diskon}}
-            @endif"
-            data-promosi="{{$item->promosi}}"
-            data-status="{{$item->status}}">
-                <a href="{{ route('detail_barang', $item->id)}}" style="text-decoration: none;">
-                    <div class="card" id="product">
-                        <div class="top_product">
-                            {{-- <img src="{{asset('storage/image/'.'/'.$item->gambar_barang)}}" alt=""> --}}
-                            <img src="{{$item->file_location.'/'.$item->file_hash}}" title="{{$item->file_name}}" alt=""
-                                width="75">
-                        </div>
-                        <div class="card-body text-center">
-                            <h5 class="card-title text-black">{{$item->judul_barang}}</h5>
-                            {{-- <p class="card-text">Rp.{{ number_format($item->harga, 2, ',', '.') }}</p> --}}
-                            @if ($item->harga_diskon==null)
-                            <p class="card-text fw-bold mb-0" style="font-size: .75rem; visibility: hidden;">
-                                Rp.{{ number_format($item->harga_diskon, 2, ',', '.') }}</p>
-                            <p class="card-text fw-bold mb-0" style="color: #19376D;">
-                                Rp.{{ number_format($item->harga_asli, 2, ',', '.') }}</p>
-                            @else
-                            <p class="card-text fw-bold mb-0"
-                                style="font-size: .75rem; text-decoration: line-through; color: red;">
-                                Rp.{{ number_format($item->harga_asli, 2, ',', '.') }}</p>
-                            <p class="card-text fw-bold mb-0" style="color: #19376D;">
-                                Rp.{{ number_format($item->harga_diskon, 2, ',', '.') }}</p>
-                            @endif
-                            <div class="stok_terjual d-flex justify-content-between flex-wrap">
-                                <p class="mb-3 text-black">Stok : {{ $item->stok }}</p>
-                                <p class="mb-3 text-black">{{ $item->terjual }} terjual</p>
+                terjual_count="{{$item->terjual}}"
+                terbaru_count="{{$item->created_at}}"
+                harga_count="
+                @if ($item->harga_diskon==null)
+                    {{$item->harga_asli}}
+                @else
+                    {{$item->harga_diskon}}
+                @endif"
+                data-promosi="{{$item->promosi}}"
+                data-status="{{$item->status}}">
+                    <a href="{{ route('detail_barang', $item->id)}}" style="text-decoration: none;">
+                        <div class="card" id="product">
+                            <div class="top_product">
+                                {{-- <img src="{{asset('storage/image/'.'/'.$item->gambar_barang)}}" alt=""> --}}
+                                <img src="{{'img/'.$item->file_name}}" title="{{$item->file_name}}" alt=""
+                                    width="75">
                             </div>
-                            <div class="rating">
-                                @if($item->rate <= 0) <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    @elseif($item->rate == 1)
-                                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    @elseif($item->rate == 2)
-                                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    @elseif($item->rate == 3)
-                                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    @elseif($item->rate == 4)
-                                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    @elseif($item->rate >= 5)
-                                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                                    @endif
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-black">{{$item->judul_barang}}</h5>
+                                {{-- <p class="card-text">Rp.{{ number_format($item->harga, 2, ',', '.') }}</p> --}}
+                                @if ($item->harga_diskon==null)
+                                <p class="card-text fw-bold mb-0" style="font-size: .75rem; visibility: hidden;">
+                                    Rp.{{ number_format($item->harga_diskon, 2, ',', '.') }}</p>
+                                <p class="card-text fw-bold mb-0" style="color: #19376D;">
+                                    Rp.{{ number_format($item->harga_asli, 2, ',', '.') }}</p>
+                                @else
+                                <p class="card-text fw-bold mb-0"
+                                    style="font-size: .75rem; text-decoration: line-through; color: red;">
+                                    Rp.{{ number_format($item->harga_asli, 2, ',', '.') }}</p>
+                                <p class="card-text fw-bold mb-0" style="color: #19376D;">
+                                    Rp.{{ number_format($item->harga_diskon, 2, ',', '.') }}</p>
+                                @endif
+                                <div class="stok_terjual d-flex justify-content-between flex-wrap">
+                                    <p class="mb-3 text-black">Stok : {{ $item->stok }}</p>
+                                    <p class="mb-3 text-black">{{ $item->terjual }} terjual</p>
+                                </div>
+                                <div class="rating">
+                                    @if($item->rate <= 0) <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        @elseif($item->rate == 1)
+                                        <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        @elseif($item->rate == 2)
+                                        <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        @elseif($item->rate == 3)
+                                        <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        @elseif($item->rate == 4)
+                                        <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        @elseif($item->rate >= 5)
+                                        <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        @endif
+                                </div>
+                                {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
                             </div>
-                            {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
                         </div>
-                    </div>
-                </a>
+                    </a>
             </div>
             @endforeach
         </div>
@@ -282,11 +282,11 @@
 <section class="container" style="height: max-content; margin-top: 12.5rem;">
     <div class="grid-container href-artikel"> 
            @if(empty($Artikel[0]))
-            <img src="{{asset('../img/logoplus.jpg')}}" id="logoplus" alt="">
+            <img src="{{asset('/img/logoplus.jpg')}}" id="logoplus" alt="">
            @else
             <a id="a-genap" href="{{ route('detail_artikel', $Artikel[0]->id)}}" class="grid-item item1 mt-3 la__image">
             {{-- <img class="img-fluid" src="{{asset('../img/artikel-kami-img.png')}}" alt=""> --}}
-            <img class="img-fluid" src="{{asset('../storage/image/'.'/'.$Artikel[0]->gambar_artikel)}}" alt="">
+            <img class="img-fluid" src="{{asset('img/'.$Artikel[0]->gambar_artikel)}}" alt="">
             <div class="overlay">
                 <p class="mb-1 fw-bold">{{ $Artikel[0]->judul_artikel }}</p>
                 <p>{{ $Artikel[0]->subjudul_artikel }}</p>
@@ -297,8 +297,8 @@
                 <img src="{{asset('../img/logoplus.jpg')}}" id="logoplus" alt="">
             @else
                 <a id="a-genap" href="{{ route('detail_artikel', $Artikel[1]->id)}}" class="grid-item item2 mt-3 la__image">
-                    <img class="img-fluid" src="{{asset('../storage/image/'.'/'.$Artikel[1]->gambar_artikel)}}" alt="">
-                    {{-- <img class="img-fluid" src="{{asset('../storage/image/'.'/'.$item->gambar_artikel)}}" alt=""> --}}
+                    <img class="img-fluid" src="{{asset('img/'.$Artikel[1]->gambar_artikel)}}" alt="">
+                    {{-- <img class="img-fluid" src="{{asset('img/'.$item->gambar_artikel)}}" alt=""> --}}
                     <div class="overlay">
                         <p class="mb-1">{{ $Artikel[1]->subjudul_artikel }}</p>
                     </div>
@@ -308,7 +308,7 @@
                 <img src="{{asset('../img/logoplus.jpg')}}" id="logoplus" alt="">
             @else
                 <a id="a-ganjil" href="{{ route('detail_artikel', $Artikel[4]->id)}}" class="grid-item item3 mt-3 la__image">
-                    <img class="img-fluid" src="{{asset('../storage/image/'.'/'.$Artikel[4]->gambar_artikel)}}" alt="">
+                    <img class="img-fluid" src="{{asset('img/'.$Artikel[4]->gambar_artikel)}}" alt="">
                     <div class="overlay">
                         <p class="mb-1">{{ $Artikel[4]->subjudul_artikel }}</p>
                     </div>
@@ -318,7 +318,7 @@
                 <img src="{{asset('../img/logoplus.jpg')}}" id="logoplus" alt="">
             @else
                 <a id="a-genap" href="{{ route('detail_artikel', $Artikel[2]->id)}}" class="grid-item item4 mt-3 la__image">
-                    <img class="img-fluid" src="{{asset('../storage/image/'.'/'.$Artikel[2]->gambar_artikel)}}" alt="">
+                    <img class="img-fluid" src="{{asset('img/'.$Artikel[2]->gambar_artikel)}}" alt="">
                     <div class="overlay">
                         <p class="mb-1 fw-bold">{{ $Artikel[2]->subjudul_artikel }}</p>
                     </div>
@@ -328,7 +328,7 @@
                 <img src="{{asset('../img/logoplus.jpg')}}" id="logoplus" alt="">
             @else
                 <a id="a-genap" href="{{ route('detail_artikel', $Artikel[3]->id)}}" class="grid-item item5 mt-3 la__image">
-                    <img class="img-fluid" src="{{asset('../storage/image/'.'/'.$Artikel[3]->gambar_artikel)}}" alt="">
+                    <img class="img-fluid" src="{{asset('img/'.$Artikel[3]->gambar_artikel)}}" alt="">
                     <div class="overlay">
                         <p class="mb-1 fw-bold">{{ $Artikel[3]->judul_artikel }}</p>
                         <p>{{ $Artikel[3]->subjudul_artikel }}</p>
@@ -342,7 +342,7 @@
         margin-top: 12.5rem;">
     <div class="grid-container href-artikel">
         <a href="/artikel" class="grid-item item1 mt-3 la__image">
-            <img class="img-fluid" src="{{asset('../img/artikel-kami-img.png')}}" alt="">
+            <img class="img-fluid" src="../img/artikel-kami-img.png" alt="">
             <div class="overlay">
                 <p class="mb-1 fw-bold">SAMPAI JUMPA DI TOKO</p>
                 <p>Sebelum berkunjung, lihat halaman Toko dan Pick-up Point SIVALI untuk mengetahui informasi seputar
@@ -377,10 +377,11 @@
     </div>
 </section> --}}
 
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"> -->
+<!-- </script> -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
-</script>
+@section('custom_script')
+
 <script>
     // var url = window.location.href;
     $(document).ready(function (e) {
@@ -399,71 +400,72 @@
             });
     });
     // SORT TERBARU
+    var resultterbaru = "";
+    var resultterlaris = "";
+    var resulttermurah = "";
+    var resulttermahal = "";
+    var resultpromo = "";
+    var resultstatus = "";
+
         var sortterbaru = jQuery(".lbblbb").find(".list-barang-barang").toArray().reverse(function(a, b){return parseInt(b.getAttribute('terbaru_count')) - parseInt(a.getAttribute('terbaru_count'))});
             jQuery.each(sortterbaru, function(index, value) {
                 jQuery(".lbblbb").append(value);
             });
-                var resultterbaru = "";
                 for (var i = 0; i < 4; i++) {
-            resultterbaru += sortterbaru[i].innerHTML;
+            resultterbaru += $(sortterbaru[i]).html();
         }
     // SORT TERLARIS
         var sortterjual = jQuery(".lbblbb").find(".list-barang-barang").toArray().sort(function(a, b){return parseInt(b.getAttribute('terjual_count')) - parseInt(a.getAttribute('terjual_count'))});
             jQuery.each(sortterjual, function(index, value) {
                 jQuery(".lbblbb").append(value);
             });
-                var resultterlaris = "";
-                for (var i = 0; i < 4; i++) {
-            resultterlaris += sortterjual[i].innerHTML;
-        }
+            for (var i = 0; i < 4; i++) {
+                resultterlaris += $(sortterjual[i]).html();
+            }
     // SORT TERMURAH
         var sorttermurah = jQuery(".lbblbb").find(".list-barang-barang").toArray().sort(function(a, b){return parseInt(a.getAttribute('harga_count')) - parseInt(b.getAttribute('harga_count'))});
         jQuery.each(sorttermurah, function(index, value) {
         jQuery(".lbblbb").append(value);
         });
-        var resulttermurah = "";
                 for (var i = 0; i < 4; i++) {
-            resulttermurah += sorttermurah[i].innerHTML;
+            resulttermurah += $(sorttermurah[i]).html();
         }
     // SORT TERMAHAL
         var sorttermahal = jQuery(".lbblbb").find(".list-barang-barang").toArray().sort(function(a, b){return parseInt(b.getAttribute('harga_count')) - parseInt(a.getAttribute('harga_count'))});
         jQuery.each(sorttermahal, function(index, value) {
         jQuery(".lbblbb").append(value);
         });
-        var resulttermahal = "";
                 for (var i = 0; i < 4; i++) {
-            resulttermahal += sorttermahal[i].innerHTML;
+            resulttermahal += $(sorttermahal[i]).html();
         }
-        // SORT HOME ACTIVE
+        // SORT SEMUA
         var sortiractive = document.querySelectorAll('[data-status="Active"]');
-            var resultstatus = "";
                 for (var i = 0; i < 4; i++) {
-                    resultstatus += sortiractive[i].innerHTML;
+                    resultstatus += $(sortiractive[i]).html();
                 };
         // SORT PROMO
         var sortirpromo = document.querySelectorAll('[data-promosi="Promo"]');
-        var resultpromo = "";
         for (var i = 0; i < 4; i++) {
-            resultpromo += sortirpromo[i].innerHTML;
+            resultpromo += $(sortirpromo[i]).html();
         };
     
     function showterbaru() {
-        document.getElementById("lbblbb").innerHTML = resultterbaru;
+        $("#lbblbb").html(resultterbaru == undefined ? '' : resultterbaru);
     }
     function showpromo() {
-        document.getElementById("lbblbb").innerHTML = resultpromo;
+        $("#lbblbb").html(resultpromo == undefined ? '' : resultpromo);
     }
     function showterlaris() {
-        document.getElementById("lbblbb").innerHTML = resultterlaris;
+        $("#lbblbb").html(resultterlaris == undefined ? '' : resultterlaris);
     }
     function showtermurah() {
-        document.getElementById("lbblbb").innerHTML = resulttermurah;
+        $("#lbblbb").html(resulttermurah == undefined ? '' : resulttermurah);
     }
     function showtermahal() {
-        document.getElementById("lbblbb").innerHTML = resulttermahal;
+        $("#lbblbb").html(resulttermahal == undefined ? '' : resulttermahal);
     }
     function home() {
-        document.getElementById("lbblbb").innerHTML = resultstatus;
+        $("#lbblbb").html(resultstatus == undefined ? '' : resultstatus);
         // window.location = url
     }
 
@@ -473,6 +475,9 @@
     
 
 </script>
+
+@endsection
+
 {{-- <script>
     $(#lb_filter).on("click", function(){
     $('#list-barang').load(' #list-barang')

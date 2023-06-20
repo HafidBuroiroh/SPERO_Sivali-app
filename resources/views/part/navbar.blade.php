@@ -124,22 +124,22 @@
   }
 }
 .searchTerm {
-  width: 2.5rem;
+  width: 10rem;
   transition: all .5s ease-in;
   border: .5px solid #00B4CC;
   border-right: none;
   padding: 5px;
-  height: max-content;
+  height: 2.25rem;
   border-radius: 5px 0 0 5px;
   outline: none;
   color: #9DBFAF;
 }
 
-.searchTerm:focus{
+/* .searchTerm:focus{
   color: #888b8b;
   width: 15rem;
   transition: all .5s ease-in;
-}
+} */
 
 .searchButton {
   width: 2.5rem;
@@ -162,12 +162,12 @@
     <div class="container">
         <div class="container-fluid">
             <div class="nav_logo">
-                <a class="navbar-brand" href="/home"><img src="{{asset('../img/logo-sivali.png')}}" width="100px" alt=""></a>
+                <a class="navbar-brand" href="/"><img src="{{asset('../img/logo-sivali.png')}}" width="100px" alt=""></a>
             </div>
             <div class="collapse navbar-collapse" id="navbarText">
               <ul class="navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item {{ Request::segment(1) === 'home' ? 'navactive' : null }}">
-                  <a class="nav-link fs-5" aria-current="page" href="{{ url('home' )}}">Home</a>
+                <li class="nav-item {{ Request::segment(1) === '' ? 'navactive' : null }}">
+                  <a class="nav-link fs-5" aria-current="page" href="{{ url('/' )}}">Home</a>
                 </li>
                 <li class="nav-item {{ Request::segment(1) === 'katalog' ? 'navactive' : null }}">
                   <a class="nav-link fs-5" aria-current="page" href="{{ url('katalog' )}}">Katalog</a>
@@ -182,21 +182,20 @@
             </div>  
             <div class="nav_notif">
                 <span class="navbar-text d-flex align-items-center justify-content-center gap-3">
-                  {{-- <form role="search">
-                    <div class="search-box">
-                      <button class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                      <input type="search" id="myInput" onkeyup="myFunction()" class="input-search" placeholder="Type to Search...">
-                    </div>
-                  </form> --}}
-                  <form action="{{ url('search') }}" method="GET" role="search" class="wrap">
+                  @if(Auth::user() == NULL)
+                  <a href="/login" class="btn btn-primary fs-bold text-white px-3 py-2">Login</a>
+                  @elseif(Auth::user()->level == 'admin')
+                  <a href="/login" class="btn btn-primary fs-bold text-white px-3 py-2">Login</a>
+                  @elseif(Auth::user()->level == 'user')
+                    <form action="{{ url('search') }}" method="GET" role="search" class="wrap">
                     <div class="search">
-                      <input type="search" name="search" value="" class="searchTerm" placeholder="Cari Barangmu...">
+                      <input type="search" name="search" value="" class="searchTerm" placeholder="Search Barang">
                       <button type="submit" class="searchButton">
                         <i class="fa fa-search"></i>
                      </button>
                     </div>
                   </form>
-                    <a href="">
+                    <a href="{{url('logout')}}">
                       <div class="profil me-2">
                         <i class="fa-lg fa-regular fa-user w-75"></i>
                       </div>
@@ -207,6 +206,12 @@
                         <i class="fa-lg fa-regular fa-heart"></i>
                         </div>
                     </a>
+                    <a href="{{ url('chart') }}">
+                      <div class="chart">
+                      <i class="fa-lg fa-solid fa-cart-shopping"></i>
+                        </div>
+                    </a>
+                    @endif
                 </span>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -227,7 +232,7 @@
                   <a class="nav-link fs-5" aria-current="page" href="{{ url('home' )}}">Home</a>
                 </li>
                 <li class="nav-item {{ Request::segment(1) === 'katalog' ? 'navactive' : null }}">
-                  <a class="nav-link fs-5" aria-current="page" href="{{ url('katalog' )}}">Katalog</a>
+                  <a class="nav-link fs-5" aria-current="page" href="{{ url('katalog' )}}">Katalog gw</a>
                 </li>
                 <li class="nav-item {{ Request::segment(1) === 'artikel' ? 'navactive' : null }}">
                   <a class="nav-link fs-5" aria-current="page" href="{{ url('artikel' )}}">Artikel</a>

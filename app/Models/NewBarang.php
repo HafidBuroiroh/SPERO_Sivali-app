@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Chart;
 use App\Models\Banner;
 use App\Models\NewKategoriBarang;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,9 @@ class NewBarang extends Model
     }
     public function Favorit(){
         return $this->hasMany(Favorit::class);
+    }
+    public function chart(){
+        return $this->hasMany(Chart::class);
     }
     public function Banner(){
         return $this->hasMany(Banner::class);

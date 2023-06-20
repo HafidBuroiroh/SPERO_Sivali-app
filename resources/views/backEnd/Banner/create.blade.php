@@ -6,7 +6,7 @@
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body p-5">
-                <h4 class="card-title">Form Kategori Barang</h4>
+                <h4 class="card-title">Form Banner</h4>
                 <form action="{{ route('ban_store') }}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                       <div class="form-group mt-5">

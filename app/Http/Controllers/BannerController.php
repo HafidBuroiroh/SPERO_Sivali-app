@@ -39,13 +39,19 @@ class BannerController extends Controller
             'id_barang' => 'required',
         ]);
 
-        $gambar_banner = $request->file('gambar_banner');
-        $gambar_banner->storeAs('public/image', $gambar_banner->hashName());
+        $newBanner = new Banner();
+        $newBanner->id_barang = $request->id_barang;
+        if($request->hasFile('gambar_banner'))
+        {
+            $fotoBanner = 'gambar'.rand(1,99999).'.'.$request->gambar_banner->getClientOriginalExtension();
+            $request->file('gambar_banner')->move(public_path().'/img/', $fotoBanner);
+            $newBanner->gambar_banner = $fotoBanner;
+            $newBanner->save();
+        }
+        $newBanner->save();
 
-        Banner::create([
-            'gambar_banner' => $gambar_banner->hashName(),
-            'id_barang' => $request->id_barang,
-        ]);
+
+        
         // Banner::create($request->all());
         return redirect('/banner')->with('success','Data Pemesanan Berhasil Di Tambahkan');
     }

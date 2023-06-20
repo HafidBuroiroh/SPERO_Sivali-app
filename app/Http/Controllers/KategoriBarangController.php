@@ -40,13 +40,19 @@ class KategoriBarangController extends Controller
             'kategori_barang' => 'required',
         ]);
 
-        $gambar_kategori = $request->file('gambar_kategori');
-        $gambar_kategori->storeAs('public/image', $gambar_kategori->hashName());
+        $kategoriNew = new NewKategoriBarang();
+        $kategoriNew->kategori_barang = $request->kategori_barang;
+        if($request->hasFile('gambar_kategori'))
+        {
+            $category = 'category'.rand(1,99999).'.'.$request->gambar_kategori->getClientOriginalExtension();
+            $request->file('gambar_kategori')->move(public_path().'/img/', $category);
+            $kategoriNew->gambar_kategori = $category;
+            $kategoriNew->save();
+        }
+        $kategoriNew->save();
 
-        NewKategoriBarang::create([
-            'gambar_kategori' => $gambar_kategori->hashName(),
-            'kategori_barang' => $request->kategori_barang,
-        ]);
+        
+
         // KategoriBarang::create($request->all());
         return redirect('/kategoriBarang')->with('success','Data Pemesanan Berhasil Di Tambahkan');
     }

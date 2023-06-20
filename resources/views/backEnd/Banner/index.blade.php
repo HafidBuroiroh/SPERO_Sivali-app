@@ -20,29 +20,19 @@
                 <table class="table table-hover table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>No</th>
                             <th>Gambar</th>
                             <th>Barang</th>
-                            {{-- @if(auth()->user()->level == "admin") --}}
                             <th>Aksi</th>
-                            {{-- @endif --}}
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($Banner as $item)
                         <tr>
-                            <td>{{$item->id}}</td>
-                            {{-- <td><img src="../storage/image/{{$item->gambar_barang}}" alt="" width="200px"></td> --}}
-                            <td><img src="{{asset('storage/image/'.$item->gambar_banner)}}" alt="" width="75"></td>
+                            <td>{{$loop->iteration}}</td>
+                            <td><img src="{{asset('img/'.$item->gambar_banner)}}" alt="" width="75"></td>
                             <td>{{$item->Barang->judul_barang}}</td>
-                            {{-- <td>{{$item->url}}</td> --}}
-                            {{-- <td>{{$item->nama_petugas}}</td> --}}
-                            {{-- @if(auth()->user()->level == "admin") --}}
                             <td class="d-flex gap-3 justify-content-center align-items-center">
-                                {{-- <a href="{{ route('ban_show', $item->id )}}" class="btn btn-outline-primary
-                                btn-icon-text">
-                                Lihat
-                                </a> --}}
                                 <a href="{{ route('ban_edit', $item->id )}}"
                                     class="btn btn-outline-success btn-icon-text">
                                     Edit

@@ -41,15 +41,20 @@ class ArtikelController extends Controller
             'deskripsi_artikel' => 'required',
         ]);
 
-        $gambar_artikel = $request->file('gambar_artikel');
-        $gambar_artikel->storeAs('public/image', $gambar_artikel->hashName());
+        $newArtikel = new Artikel();
+        $newArtikel->judul_artikel = $request->judul_artikel;
+        $newArtikel->subjudul_artikel = $request->subjudul_artikel;
+        $newArtikel->deskripsi_artikel = $request->deskripsi_artikel;
 
-        Artikel::create([
-            'gambar_artikel' => $gambar_artikel->hashName(),
-            'judul_artikel' => $request->judul_artikel,
-            'subjudul_artikel' => $request->subjudul_artikel,
-            'deskripsi_artikel' => $request->deskripsi_artikel,
-        ]);
+        if($request->hasFile('gambar_artikel'))
+        {
+            $fotoArtikel = 'gambar'.rand(1,99999).'.'.$request->gambar_artikel->getClientOriginalExtension();
+            $request->file('gambar_artikel')->move(public_path().'/img/', $fotoArtikel);
+            $newArtikel->gambar_artikel = $fotoArtikel;
+            $newArtikel->save();
+        }
+
+       $newArtikel->save();
         // Artikel::create($request->all());
         return redirect('/admartikel')->with('success','Data Pemesanan Berhasil Di Tambahkan');
     }

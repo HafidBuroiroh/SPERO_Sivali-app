@@ -18,7 +18,7 @@
 @foreach ($ArtikelRandom->take(1) as $item)
 <div class="container d-flex align-items-end" id="artikel">
     <div class="artikel__content">
-        <img class="img-fluid" src="{{asset('../storage/image/'.'/'.$item->gambar_artikel)}}" alt="">
+        <img class="img-fluid" src="{{asset('img/'.$item->gambar_artikel)}}" alt="">
     </div>
 </div>
 
@@ -36,7 +36,7 @@
             @foreach ($Artikel as $item)
                 <div class="col-md-4 mt-3 la__image">
                     <a href="{{ route('detail_artikel', $item->id)}}">
-                        <img class="artikel_img" src="{{asset('../storage/image/'.'/'.$item->gambar_artikel)}}" alt="">
+                        <img class="artikel_img" src="{{asset('img/'.$item->gambar_artikel)}}" alt="">
                     {{-- <img class="img-fluid" src="{{asset('../img/image-artikel.png')}}" alt=""> --}}
                     <div class="overlay">
                         <p class="mb-1 fw-bold text-start">{{$item->judul_artikel}}</p>

@@ -20,12 +20,11 @@
                 <table class="table table-hover table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>No</th>
                             <th>Status</th>
                             <th>Gambar</th>
                             <th>Kategori</th>
                             <th>Judul</th>
-                            <th>Deskripsi</th>
                             <th>Jenis Promosi</th>
                             <th>Harga Asli</th>
                             <th>Harga Diskon</th>
@@ -40,7 +39,7 @@
                     <tbody>
                         @foreach ($barang as $item)
                         <tr>
-                            <td>{{$item->id}}</td>
+                            <td>{{$loop->iteration}}</td>
                             <td>
                                 @if ($item->status == 'Active')
                                     <button class="btn btn-success">Active</button>
@@ -48,23 +47,17 @@
                                     <button class="btn btn-danger">Non Active</button>
                                 @endif
                             </td>
-                            <td><img src="{{$item->file_location.'/'.$item->file_hash}}" title="{{$item->file_name}}" alt="" width="75"></td>
+                            <td><img src="{{asset('img/'.$item->file_name)}}" alt="" height="60"></td>
                             {{-- <td><img src="{{asset('storage/image/'.$item->file_hash)}}" alt="" width="75"></td> --}}
                             <td>{{$item->kategoriBarang->kategori_barang}}</td>
                             <td>{{$item->judul_barang}}</td>
-                            <td>{{$item->deskripsi}}</td>
                             <td>{{$item->promosi}}</td>
                             <td>{{$item->harga_asli}}</td>
                             <td>{{$item->harga_diskon}}</td>
                             <td>{{$item->stok}}</td>
                             <td>{{$item->terjual}}</td>
                             <td>{{$item->rate}}</td>
-                            {{-- @if(auth()->user()->level == "admin") --}}
                             <td class="d-flex gap-3 justify-content-center align-items-center">
-                                {{-- <a href="{{ route('b_show', $item->id )}}" class="btn btn-outline-primary
-                                btn-icon-text">
-                                Lihat
-                                </a> --}}
                                 <a href="{{ route('b_edit', $item->id )}}"
                                     class="btn btn-outline-success btn-icon-text">
                                     Edit
@@ -75,7 +68,6 @@
                                     <button type="submit" class="btn btn-outline-danger btn-icon-text">Hapus</button>
                                 </form>
                             </td>
-                            {{-- @endif --}}
                         </tr>
                         @endforeach
                     </tbody>
