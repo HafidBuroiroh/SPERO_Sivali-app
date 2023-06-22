@@ -71,9 +71,6 @@ Route::middleware(['auth:web', 'PreventBack', 'user'])->group(function(){
 
         // Route::get('/katalog/{id}', [FrontEndBarangController::class,'SearchProduct']);
 
-        Route::get('/profil', [ProfilController::class,'index']);
-
-        Route::resource('chart', ChartController::class);
         // Route::get('/wishlist/{id}', [FrontEndBarangController::class,'detailBarang'])->name('detail_barang');
 
         Route::get('/wishlist', [FavoritController::class,'index'])->name('wl_index');
@@ -96,13 +93,7 @@ Route::middleware(['auth:web', 'PreventBack', 'admin'])->group(function(){
             Route::get('kategoriBarang/edit/{id}',[KategoriBarangController::class,'edit'])->name('kb_edit');
             Route::put('kategoriBarang/update/{id}',[KategoriBarangController::class,'update'])->name('kb_update');
             Route::delete('kategoriBarang/delete/{id}',[KategoriBarangController::class,'destroy'])->name('kb_delete');
-            
-            // Manage User
-            Route::resource('manage_user', ManageUserCotroller::class);
-            Route::put('manage_user/resetpassword/{id}',[ManageUserCotroller::class,'resetpassword'])->name('resetpassword');
-            
-            Route::resource('list_chart', ListChartController::class);
-            Route::resource('list_fav', ListFavoritController::class);
+            // Route::resource('list_fav', ListFavoritController::class);
             
     
             // D A T A   B A R A N G  

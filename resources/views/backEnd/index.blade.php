@@ -122,7 +122,6 @@
                     </div>
                 </form>
                 <ul class="navbar-nav navbar-right">
-                    
                     <li class="dropdown"><a href="#" data-toggle="dropdown"
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                             <img alt="image" src="{{asset('../theme/dist/assets/img/avatar/avatar-1.png')}}" class="rounded-circle mr-1">
@@ -178,7 +177,7 @@
                             <a class="nav-link {{ Request::segment(1) === 'banner' ? 'sideactive' : null }}" href="{{ url('banner' )}}"><i class="far fa-file-alt"></i>
                             <span>Banner</span></a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a class="nav-link {{ Request::segment(1) === 'manage_user' ? 'sideactive' : null }}" href="{{ url('manage_user' )}}"><i class="far fa-user"></i>
                             <span>Manage User</span></a>
                         </li>
@@ -189,7 +188,7 @@
                         <li>
                             <a class="nav-link {{ Request::segment(1) === 'list_fav' ? 'sideactive' : null }}" href="{{ url('list_fav' )}}"><i class="far fa-file-alt"></i>
                             <span>List Favorit</span></a>
-                        </li>
+                        </li> -->
                         {{-- <li class="dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fas fa-columns"></i> <span>Layout</span></a>
@@ -357,8 +356,7 @@
             </div>
             <footer class="main-footer">
                 <div class="footer-left">
-                    Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad
-                        Nauval Azhar</a>
+                    Copyright Sivali <div class="bullet"></div> Design By <a href="/">Sivali</a>
                 </div>
                 <div class="footer-right">
 

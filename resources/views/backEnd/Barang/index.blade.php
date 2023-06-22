@@ -16,6 +16,17 @@
           </a> --}}
             </div>
             {{-- @endif --}}
+            @if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @elseif(session('deleted'))
+    <div class="alert alert-danger alert-dismissible fade show">
+        {{ session('deleted') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
             <div class="table-responsive text-center">
                 <table class="table table-hover table-striped">
                     <thead>
@@ -42,9 +53,9 @@
                             <td>{{$loop->iteration}}</td>
                             <td>
                                 @if ($item->status == 'Active')
-                                    <button class="btn btn-success">Active</button>
+                                    <button class="btn btn-outline-primary fw-bold text-dark">Active</button>
                                 @else
-                                    <button class="btn btn-danger">Non Active</button>
+                                    <button class="btn btn-outline-danger fw-bold text-dark">Non Active</button>
                                 @endif
                             </td>
                             <td><img src="{{asset('img/'.$item->file_name)}}" alt="" height="60"></td>

@@ -1,5 +1,38 @@
-<style>
-   
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/logo-sivali.png') }}">
+    <title>Sivali</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{asset('../fontawesome/css/all.css')}}">
+    <link rel="stylesheet" href="../fontawesome/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css" integrity="sha512-WidMaWaNmZqjk3gDE6KBFCoDpBz9stTsTZZTeocfq/eDNkLfpakEd7qR0bPejvy/x0iT0dvzIq4IirnBtVer5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Poppins&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    {{-- SHARE SOCIAL MEDIA --}}
+
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/share.js') }}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+
+    <style>
+      
+      :root {
+      --blue-color: #134B6E; 
+    }
+    body{
+      font-family: 'Quicksand', sans-serif;
+    }
+
     .navbar-collapse{
         flex-basis: 0;
         flex-grow: 0;
@@ -233,8 +266,11 @@
 .d-none {
       display: none;
     }
-</style>
-<nav class="navbar navbar-expand-lg bg-light position-sticky top-0 w-100" id="nav-large">
+    </style>
+  </head>
+  <body>
+    
+  <nav class="navbar navbar-expand-lg bg-light position-sticky top-0 w-100" id="nav-large">
     <div class="container">
         <div class="container-fluid">
             <div class="nav_logo">
@@ -258,14 +294,19 @@
             </div>  
             <div class="nav_notif">
                 <span class="navbar-text d-flex align-items-center justify-content-center gap-3">
-                    <form action="{{ url('search') }}" method="GET" role="search" class="wrap">
+                  @if(Auth::user() == NULL)
+                  <a href="/login" class="btn btn-primary fs-bold text-white px-3 py-2">Login</a>
+                  @elseif(Auth::user()->level == 'admin')
+                  <a href="/login" class="btn btn-primary fs-bold text-white px-3 py-2">Login</a>
+                  @elseif(Auth::user()->level == 'user')
+                    <!-- <form action="{{ url('search') }}" method="GET" role="search" class="wrap">
                     <div class="search">
                       <input type="search" name="search" value="" class="searchTerm" placeholder="Search Barang">
                       <button type="submit" class="searchButton">
                         <i class="fa fa-search"></i>
                      </button>
                     </div>
-                  </form>
+                  </form> -->
                   <!-- <a href="{{url('logout')}}">
                     <div class="profil me-2">
                       <i class="fa-lg fa-regular fa-user w-75"></i>
@@ -277,14 +318,30 @@
                       <i class="fa-lg fa-regular fa-heart"></i>
                     </div>
                   </a>
-                
-                    <!-- <li>
+                  <a href="{{ url('chart') }}">
+                    <div class="chart">
+                      <i class="fa-lg fa-solid fa-cart-shopping"></i>
+                    </div>
+                  </a>
+                  <label class="dropdown">
+
+                  <div class="dd-button">
+                  <i class="fa-lg fa-regular text-dark fa-user"></i>
+                  </div>
+
+                  <input type="checkbox" class="dd-input" id="test">
+
+                  <ul class="dd-menu text-dark">
+                    <li>
                       <a href="/profil"><i class="fa-regular text-dark fa-user me-2"></i>Profile</a>
-                    </li> -->
-                    
+                    </li>
+                    <li>
+                      <a href="/logout"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a>
+                    </li>
                   </ul>
                   
                 </label>
+                    @endif
                 </span>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -346,21 +403,29 @@
         </div>
     </div>
 </nav>
+<div class="container mt-4">
+  <div class="row g-2">
+    <div class="col-4">
+      <div class="ms-5 text-center">
+        <img src="{{asset('../img/mozaik.jpg')}}" width="250px" height="250px" class="rounded-circle border border-2 border-dark" alt="">
+        <h3 class="opacity-90 mt-3">{{Auth::user()->name}}</h3>
+        <button class="btn btn-outline-primary" style="padding: 2px 3.7rem">Edit Profile</button>
+    </div>
+    </div>
+    <div class="col-8">
+      <div class="p-3 border bg-light">Custom column padding</div>
+    </div>
+  </div>
+</div>
 
-<script src="https://cdn.jsdelivr.net/combine/npm/jquery,npm/g1"></script>
-  {{-- <script>
-    $('body').search()
-  </script> --}}
 
-{{-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript">
-    document.querySelectorAll(".nav-item").forEach((ele) =>
-  ele.addEventListener("click", function (event) {
-    event.preventDefault();
-    document
-      .querySelectorAll(".nav-item")
-      .forEach((ele) => ele.classList.remove("active"));
-    this.classList.add("active")
-  })
-);
-</script> --}}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+<script src="{{asset('../js/coba.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</body>
+</html>

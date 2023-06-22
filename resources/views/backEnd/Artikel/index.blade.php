@@ -5,17 +5,24 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            {{-- @if(auth()->user()->level == "admin") --}}
             <div class="card-title d-flex justify-content-end mb-5">
                 <a href="{{ route('art_create') }}" class="btn btn-primary btn-icon-text">
                     <i class="mdi mdi-upload btn-icon-prepend"></i>
                     Upload
                 </a>
-                {{-- <a href="" class="btn btn-primary">
-              Add Category
-          </a> --}}
+               
             </div>
-            {{-- @endif --}}
+            @if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @elseif(session('deleted'))
+    <div class="alert alert-danger alert-dismissible fade show">
+        {{ session('deleted') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
             <div class="table-responsive text-center">
                 <table class="table table-hover table-striped">
                     <thead>

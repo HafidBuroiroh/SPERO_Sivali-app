@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('profils', function (Blueprint $table) {
             $table->id();
-            $table->string('gambar_profil');
-            $table->string('nama_lengkap');
-            $table->string('alamat');
-            $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
-            $table->string('email');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('jenis_kelamin')->nullable();
+            $table->string('foto')->nullable();
+            $table->integer('no_telp')->nullable();
+            $table->string('alamat')->nullable();
             $table->timestamps();
         });
     }

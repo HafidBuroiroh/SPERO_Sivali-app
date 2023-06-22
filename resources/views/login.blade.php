@@ -81,7 +81,7 @@
               </div>
             </div>
             <div class="mt-2 text-muted text-center">
-              Don't have an account? <a href="/register">Create One</a>
+              Don't have an account? <a href="#">Create One</a>
             </div>
             <div class="simple-footer">
               

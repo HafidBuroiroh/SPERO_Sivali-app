@@ -92,7 +92,7 @@
                     <div class="carousel-inner">
                         <div class="slider">
                             @foreach ($Banner as $key => $item)
-                            <a href="{{ route('detail_barang', $item->id_barang)}}" target="_blank">
+                            <a href="#">
                                 <div class="carousel-item {{ $key == 0 ? 'active' : ''}}" id="carousel_img">
                                     <img class="img-fluid" src="{{asset('img/'.$item->gambar_banner)}}"
                                         alt="">
@@ -104,11 +104,11 @@
                 </div>
             </div>
             <div class="next_prev" id="lg-np">
-                <button style="z-index: 3;" class="position-absolute carousel-control-prev" type="button"
+                <button style="z-index: 3;" class="ms-5 position-absolute carousel-control-prev" type="button"
                     data-bs-target="#carouselExampleFade" data-bs-slide="prev">
                     <span class="fw-bold" style="color: black;">Prev</span>
                 </button>
-                <button style="z-index: 3;" class="position-absolute carousel-control-next" type="button"
+                <button style="z-index: 3;" class="position-absolute carousel-control-next me-5" type="button"
                     data-bs-target="#carouselExampleFade" data-bs-slide="next">
                     <span class="fw-bold" style="color: black;">Next</span>
                 </button>
@@ -132,7 +132,7 @@
 </div>
 
 <div class="container-fluid mb-5" id="kategoribarang">
-    <h3 class="mb-5 text-center fw-bold">Kategori Barang</h3>
+    <h1 class="mb-5 text-center fw-bold">Kategori Barang</h1>
     <div class="k_b d-flex justify-content-center">
         @foreach ($kategoriBarang as $item)
         {{-- <a class="text-black" href="{{ url('katalog')}}#list_katalog" style="text-decoration: none;"> --}}
@@ -410,8 +410,9 @@
         var sortterbaru = jQuery(".lbblbb").find(".list-barang-barang").toArray().reverse(function(a, b){return parseInt(b.getAttribute('terbaru_count')) - parseInt(a.getAttribute('terbaru_count'))});
             jQuery.each(sortterbaru, function(index, value) {
                 jQuery(".lbblbb").append(value);
+                console.log(value)
             });
-                for (var i = 0; i < 4; i++) {
+                for (var i = 0; i < (sortterbaru.length > 4 ? 4 : sortterbaru.length); i++) {
             resultterbaru += $(sortterbaru[i]).html();
         }
     // SORT TERLARIS
@@ -419,7 +420,7 @@
             jQuery.each(sortterjual, function(index, value) {
                 jQuery(".lbblbb").append(value);
             });
-            for (var i = 0; i < 4; i++) {
+            for (var i = 0; i < (sortterjual.length > 4 ? 4 : sortterjual.length); i++) {
                 resultterlaris += $(sortterjual[i]).html();
             }
     // SORT TERMURAH
@@ -427,7 +428,7 @@
         jQuery.each(sorttermurah, function(index, value) {
         jQuery(".lbblbb").append(value);
         });
-                for (var i = 0; i < 4; i++) {
+                for (var i = 0; i < (sorttermurah.length > 4 ? 4 : sorttermurah.length); i++) {
             resulttermurah += $(sorttermurah[i]).html();
         }
     // SORT TERMAHAL
@@ -435,25 +436,22 @@
         jQuery.each(sorttermahal, function(index, value) {
         jQuery(".lbblbb").append(value);
         });
-                for (var i = 0; i < 4; i++) {
+                for (var i = 0; i < (sorttermahal.length > 4 ? 4 : sorttermahal.length); i++) {
             resulttermahal += $(sorttermahal[i]).html();
         }
         // SORT SEMUA
         var sortiractive = document.querySelectorAll('[data-status="Active"]');
-                for (var i = 0; i < 4; i++) {
+                for (var i = 0; i < (sortiractive.length > 4 ? 4 : sortiractive.length); i++) {
                     resultstatus += $(sortiractive[i]).html();
                 };
         // SORT PROMO
         var sortirpromo = document.querySelectorAll('[data-promosi="Promo"]');
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < (sortirpromo.length > 4 ? 4 : sortirpromo.length); i++) {
             resultpromo += $(sortirpromo[i]).html();
         };
     
     function showterbaru() {
         $("#lbblbb").html(resultterbaru == undefined ? '' : resultterbaru);
-    }
-    function showpromo() {
-        $("#lbblbb").html(resultpromo == undefined ? '' : resultpromo);
     }
     function showterlaris() {
         $("#lbblbb").html(resultterlaris == undefined ? '' : resultterlaris);
@@ -466,9 +464,12 @@
     }
     function home() {
         $("#lbblbb").html(resultstatus == undefined ? '' : resultstatus);
-        // window.location = url
     }
-
+    function showpromo() {
+        $("#lbblbb").html(resultpromo == undefined ? '' : resultpromo);
+        
+    }
+    
     
      
   

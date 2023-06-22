@@ -16,6 +16,17 @@
           </a> --}}
             </div>
             {{-- @endif --}}
+            @if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @elseif(session('deleted'))
+    <div class="alert alert-danger alert-dismissible fade show">
+        {{ session('deleted') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
             <div class="table-responsive text-center">
                 <table class="table table-hover table-striped">
                     <thead>

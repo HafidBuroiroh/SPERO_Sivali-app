@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Chart;
+use App\Models\Profil;
 use App\Models\Favorit;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -47,6 +48,10 @@ class User extends Authenticatable
 
     public function favorit(){
         return $this->hasMany(Favorit::class);
+    }
+    
+    public function profil(){
+        return $this->hasMany(Profil::class);
     }
 
     public function chart(){

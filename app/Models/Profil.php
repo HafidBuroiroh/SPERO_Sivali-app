@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class profil extends Model
+class Profil extends Model
 {
-    protected $primaryKey = "id";
+    use HasFactory;
     protected $table = "profils";
-    protected $fillable = [
-        'id','gambar_profil','nama_lengkap','alamat','tempat_lahir','tanggal_lahir','email'
-    ];
+    protected $fillable = ['user_id', 'jenis_kelamin', 'foto', 'no_telp', 'alamat'];
+
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

@@ -211,10 +211,7 @@
 
 <div class="container mb-5" id="list_katalog">
     <div class="row d-flex align-items-center">
-        <div class="col-md-4 col-lg-2 col-12 text-center text-md-left">
-            <h3 class="fw-bold mb-0">FURNITURES</h3>
-        </div>
-        <div id="menu" class="col-md-8 col-lg-10 mt-3 mt-lg-0 menu d-flex gap-3 flex-wrap justify-content-center">
+        <div id="menu" class="col-md-8 col-lg-10 mt-3 mt-lg-0 menu d-flex gap-3 flex-wrap">
             <button id="home_button" class="btn menu_btn sorter" role="button" data-filter="*">Semua</button>
             @foreach ($kategoriBarang as $item)
             <button class="btn menu_btn sorter" role="button"
@@ -225,7 +222,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <ul class=" mt-5" id="sort-me">
+            <ul class="" id="sort-me">
                 @foreach ($barang as $key => $item)
                 <li class="mt-5 filter-{{$item->id_kategori}}" data-title="{{$key}}" data-order="{{$key}}">
                     {{-- <li class="mt-5" data-kategori="{{$item->id_kategori}}"> --}}

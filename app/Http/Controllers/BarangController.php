@@ -75,7 +75,7 @@ class BarangController extends Controller
         $newBarang->save();
       
         // barang::create($request->all());
-        return redirect('/barang')->with('success','Data Pemesanan Berhasil Di Tambahkan');
+        return redirect('/barang')->with('success','Data Barang Berhasil Di Tambahkan');
     }
 
     /**
@@ -117,16 +117,15 @@ class BarangController extends Controller
         ]);
 
         $barang = NewBarang::findOrfail($id);
-        if ($request->hasFile('gambar_barang')) {
-
-            $gambar_barang = $request->file('gambar_barang');
-            $gambar_barang->storeAs('public/image', $gambar_barang->hashName());
-
-            Storage::delete('public/image/'.$barang->gambar_barang);
+        if($request->hasFile('file_name'))
+        {
+            $fotoBarang = 'gambar'.rand(1,99999).'.'.$request->file_name->getClientOriginalExtension();
+            $request->file('file_name')->move(public_path().'/img/', $fotoBarang);
+            $barang->file_name = $fotoBarang;
+            $barang->save();
 
             $barang->update([
                 'status' => $request->status,
-                'gambar_barang' => $gambar_barang->hashName(),
                 'id_kategori' => $request->id_kategori,
                 'judul_barang' => $request->judul_barang,
                 'deskripsi' => $request->deskripsi,
@@ -151,7 +150,7 @@ class BarangController extends Controller
                 'rate' => $request->rate,
             ]);
         }
-        return redirect()->route('b_index');
+        return redirect()->route('b_index')->with('success', 'Data Barang Berhasil Diupdate');
     }
 
     /**
@@ -162,6 +161,6 @@ class BarangController extends Controller
         $barang = NewBarang::findOrfail($id);
         Storage::delete('public/image'.$barang->gambar_barang);
         $barang->delete();
-        return redirect()->route('kb_index')->with('success', 'Data deleted successfully');
+        return redirect()->route('kb_index')->with('deleted', 'Data Berhasil Dihapus');
     }
 }
